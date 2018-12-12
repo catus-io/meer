@@ -1,27 +1,27 @@
 <template>
-  <div class="meer-signup-w">
-    <div class="meer-signup-c">
-      <div class="meer-signup-title-c">
+  <div class="meer-auth-w meer-signup-w">
+    <div class="meer-auth-c meer-signup-c">
+      <div class="meer-auth-title-c">
         <h1>Sign up</h1>
       </div>
-      <div class="signup-input-w">
-        <div class="signup-input-c">
+      <div class="auth-input-w signup-input-w">
+        <div class="auth-input-c">
           <font-awesome-icon icon="envelope"/>
           <input type="text" v-model="email" placeholder="Your email">
         </div>
-        <div class="signup-input-c">
+        <div class="auth-input-c">
           <font-awesome-icon icon="user-alt"/>
           <input type="text" v-model="id" placeholder="Your id">
         </div>
-        <div class="signup-input-c">
+        <div class="auth-input-c">
           <font-awesome-icon icon="user-alt" class="name"/>
           <input type="text" v-model="name" placeholder="Your Name">
         </div>
-        <div class="signup-input-c">
+        <div class="auth-input-c">
           <font-awesome-icon icon="key"/>
           <input type="password" v-model="password" placeholder="Password">
         </div>
-        <div class="signup-input-c">
+        <div class="auth-input-c">
           <font-awesome-icon icon="key" class="re-password"/>
           <input type="password" v-model="repassword" placeholder="Repeat your password">
         </div>
@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="meer-signup-c">
+    <div class="meer-auth-c meer-signup-c">
       <div class="logo-w">
         <img src="@/assets/logo.png" alt="logo">
       </div>
@@ -60,4 +60,5 @@ export default {
   }
 }
 </script>
+<style lang="scss" src="@/assets/scss/auth/meer-auth.scss"></style>
 <style lang="scss" src="@/assets/scss/auth/meer-signup.scss"></style>

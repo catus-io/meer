@@ -1,6 +1,6 @@
 <template>
-  <div class="meer-signin-w">
-    <div class="meer-signin-c">
+  <div class="meer-auth-w meer-signin-w">
+    <div class="meer-auth-c meer-signin-c">
       <div class="logo-w">
         <img src="@/assets/logo.png" alt="logo">
       </div>
@@ -10,16 +10,16 @@
         </div>
       </div>
     </div>
-    <div class="meer-signin-c">
-      <div class="meer-signin-title-c">
+    <div class="meer-auth-c meer-signin-c">
+      <div class="meer-auth-title-c">
         <h1>Sign in</h1>
       </div>
-      <div class="signin-input-w">
-        <div class="signin-input-c">
+      <div class="auth-input-w">
+        <div class="auth-input-c">
           <font-awesome-icon icon="user-alt"/>
           <input type="text" v-model="id" placeholder="Your id">
         </div>
-        <div class="signin-input-c">
+        <div class="auth-input-c">
           <font-awesome-icon icon="key"/>
           <input type="password" v-model="password" placeholder="Password">
         </div>
@@ -41,4 +41,5 @@ export default {
   }
 }
 </script>
+<style lang="scss" src="@/assets/scss/auth/meer-auth.scss"></style>
 <style lang="scss" src="@/assets/scss/auth/meer-signin.scss"></style>
