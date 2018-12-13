@@ -7,11 +7,11 @@
       <div class="auth-input-w signup-input-w">
         <div class="auth-input-c">
           <font-awesome-icon icon="user-alt"/>
-          <input type="text" v-model="id" placeholder="Your id">
+          <input type="text" v-model="id" @blur="checkId" placeholder="Your id">
         </div>
         <div class="auth-input-c">
           <font-awesome-icon icon="key"/>
-          <input type="password" v-model="password" placeholder="Password">
+          <input type="password" v-model="password" @blur="checkPw" placeholder="Password">
         </div>
         <div class="auth-input-c">
           <font-awesome-icon icon="key" class="re-password"/>
@@ -72,14 +72,12 @@ export default {
       if(this.password.length < 8) {
         this.password = ''
         alert('암호를 8자 이상 입력해주세요.')
+      } else{
+        if(this.password != this.repassword) {
+          this.repassword = ''
+          alert('입력하신 비밀번호가 일치하지 않습니다.')
+        }
       }
-      if(this.password =! this.repassword) {
-        this.repassword = ''
-        alert('입력하신 비밀번호가 일치하지 않습니다.')
-      }
-      console.log(this.password.length)
-      console.log(this.password)
-      console.log(this.repassword)
     }
   },
 }
