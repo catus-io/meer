@@ -6,16 +6,8 @@
       </div>
       <div class="auth-input-w signup-input-w">
         <div class="auth-input-c">
-          <font-awesome-icon icon="envelope"/>
-          <input type="text" v-model="email" placeholder="Your email">
-        </div>
-        <div class="auth-input-c">
           <font-awesome-icon icon="user-alt"/>
           <input type="text" v-model="id" placeholder="Your id">
-        </div>
-        <div class="auth-input-c">
-          <font-awesome-icon icon="user-alt" class="name"/>
-          <input type="text" v-model="name" placeholder="Your Name">
         </div>
         <div class="auth-input-c">
           <font-awesome-icon icon="key"/>
@@ -30,7 +22,7 @@
           <span>I agree all statements in <router-link to="#">Terms of service</router-link></span>
         </div>
         <div class="register-button-w">
-          <button>Register</button>
+          <button @click = allCheck() >Register</button>
         </div>
       </div>
     </div>
@@ -57,7 +49,39 @@ export default {
       password: '',
       repassword: '',
     }
-  }
+  },
+  methods : {
+    allCheck() {
+      this.checkId()
+      this.checkPw()
+    },
+    checkId() {
+      if(this.id.length < 5) {
+        this.id = ''
+        alert('아이디를 5자 이상 입력해주세요')
+      }
+      if(this.id.length > 30) {
+        this.id = ''
+        alert('아이디를 30자 이하로 입력해주세요.')
+      }
+      else {
+        this.id = this.id.replace(/[^A-Za-z0-9_]/g,'')
+      }
+    },
+    checkPw() {
+      if(this.password.length < 8) {
+        this.password = ''
+        alert('암호를 8자 이상 입력해주세요.')
+      }
+      if(this.password =! this.repassword) {
+        this.repassword = ''
+        alert('입력하신 비밀번호가 일치하지 않습니다.')
+      }
+      console.log(this.password.length)
+      console.log(this.password)
+      console.log(this.repassword)
+    }
+  },
 }
 </script>
 <style lang="scss" src="@/assets/scss/auth/meer-auth.scss"></style>
