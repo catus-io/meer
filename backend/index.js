@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.get('/', function (req, res) {
   console.log('hello i"m back')
 })
-app.post('/', function (req, res) {
+app.post('/signup', function (req, res) {
   const { id, password } = req.body
 
   const addUser = user => {
@@ -25,6 +25,10 @@ app.post('/', function (req, res) {
   .then(addUser)
   .then(respond)
   .catch(onError)
+})
+app.post('/signin', function (req, res) {
+  const { id, password } = req.body
+  console.log(id, password)
 })
  
 app.listen(3000)

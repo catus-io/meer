@@ -15,19 +15,21 @@
         <h1>Sign in</h1>
       </div>
       <div class="auth-input-w">
-        <div class="auth-input-c">
-          <font-awesome-icon icon="user-alt"/>
-          <input type="text" v-model="id" @keyup="checkId" placeholder="Your id">
-        </div>
-        <div class="auth-input-c">
-          <font-awesome-icon icon="key"/>
-          <input type="password" v-model="password" @keyup="checkPw" placeholder="Password">
-        </div>
-        <p v-if="validationId">{{validationId}}</p>
-        <p v-if="validationPw">{{validationPw}}</p>
-        <div class="register-button-w">
-          <button>Login</button>
-        </div>
+        <form v-on:submit.prevent="onSubmit">
+          <div class="auth-input-c">
+            <font-awesome-icon icon="user-alt"/>
+            <input type="text" v-model="id" @keyup="checkId" placeholder="Your id">
+          </div>
+          <div class="auth-input-c">
+            <font-awesome-icon icon="key"/>
+            <input type="password" v-model="password" @keyup="checkPw" placeholder="Password">
+          </div>
+          <p v-if="validationId">{{validationId}}</p>
+          <p v-if="validationPw">{{validationPw}}</p>
+          <div class="register-button-w">
+            <button type="submit">Login</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -61,7 +63,10 @@ export default {
       else this.validationPw = ''
     },
     onSubmit() {
-
+      const baseURI = 'http://localhost:3000';
+      this.$http.post(`${baseURI}/signin`, { id: this.id, password: this.password })
+      // .then(() => this.$router.push('/signin'))
+      // .catch(err => this.validationId = '이미 있는 아이디입니다.')
     }
   },
 }
