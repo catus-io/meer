@@ -77,11 +77,8 @@ export default {
     onSubmit() {
       const baseURI = 'http://localhost:3000';
       this.$http.post(`${baseURI}`, { id: this.id, password: this.password })
-      .then((result) => {
-        console.log(result)
-        this.posts = result.data
-      })
-
+      .then(() => this.$router.push('/signin'))
+      .catch(err => this.validationId = '이미 있는 아이디입니다.')
     }
   },
 }
