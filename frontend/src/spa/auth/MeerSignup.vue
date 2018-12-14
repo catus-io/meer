@@ -8,7 +8,7 @@
         <div class="auth-input-c">
           <font-awesome-icon icon="user-alt"/>
           <input type="text" v-model="id" @keyup="checkId" placeholder="Your id">
-          <span>{{validationId}}</span>
+          <p>{{validationId}}</p>
         </div>
         <div class="auth-input-c">
           <font-awesome-icon icon="key"/>
@@ -17,6 +17,7 @@
         <div class="auth-input-c">
           <font-awesome-icon icon="key" class="re-password"/>
           <input type="password" v-model="repassword" @keyup="checkPw" placeholder="Repeat your password">
+          <p>{{validationPw}}</p>
         </div>
         <div class="signup-policy-c">
           <input type="checkbox">
@@ -40,6 +41,7 @@
   </div>
 </template>
 <script>
+import validation from '@/commons/validations/auth.validations.js'
 export default {
   name: 'meer-signup',
   data() {
@@ -47,41 +49,27 @@ export default {
       id: '',
       password: '',
       repassword: '',
-      validationId: ''
+      validationId: '',
+      validationPw: ''
     }
   },
   methods : {
-    allCheck() {
-      this.checkId()
-      this.checkPw()
-    },
-    validateOfIdLength() {
-      const length = this.id.length
-      if(length < 5) return true
-      else if(length > 30) return true
-      // return (length < 5 || length > 30)
-    },
-    validationRegExp(item, reg) {
-      const regExp = new RegExp(reg, 'g');
-      return regExp.test(item)
-    },
     checkId() {
-      if(this.validateOfIdLength()) {
-        console.log(this.validateOfIdLength())
+      let id = this.id
+      if(validation.length(id, 5, 30)) {
         this.validationId = '아이디는 5자 ~ 30자 내외로 입력하세요'
       }
-      if(this.validationRegExp(this.id, '[^\\w]')) this.validationId = '특수 문자 넣지마 시바'
+      else this.validationId = '' 
+      if(validation.regExp(this.id, '[^\\w]')) this.validationId = '특수 문자는 입력하실 수 없습니다.'
     },
     checkPw() {
-      if(this.password.length < 8) {
-        this.password = ''
-        // alert('암호를 8자 이상 입력해주세요.')
-      } else{
-        if(this.password != this.repassword) {
-          this.repassword = ''
-          // alert('입력하신 비밀번호가 일치하지 않습니다.')
-        }
+      let pw = this.password
+      let repw = this.repassword
+      if(validation.length(pw, 8)) {
+        this.validationPw = '암호는 8자 이상 입력하세요'
       }
+      else this.validationPw = ''
+      if(repw && !validation.compare(pw, repw)) this.validationPw = '암호가 일치하지 않습니다.'
     }
   },
 }
