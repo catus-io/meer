@@ -1,0 +1,18 @@
+.meer-task-w {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-bottom-color: rgba($color: #BDBDBD, $alpha: .6);
+  border-bottom-style: solid;
+  border-bottom-width: .3px;
+  .meer-task-name-w {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .meer-task-info-w {
+    margin: 0 10px;
+  }
+}
