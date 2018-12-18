@@ -29,6 +29,18 @@ app.post('/signup', function (req, res) {
 app.post('/signin', function (req, res) {
   const { id, password } = req.body
   console.log(id, password)
+
+  const comparePassword = (result) => {
+    if(password !== result.password) throw new Error('Not found user')
+    return result
+  }
+  const onError = err => res.status(401).json({success: 0})
+  const respond = response => res.json({success: response})
+  User.findUserById(id)
+  .then(comparePassword)
+  .then(User.createToken)
+  .then(respond)
+  .catch(onError)
 })
  
 app.listen(3000)

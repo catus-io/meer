@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb')
+const jwt = require('jsonwebtoken')
 const url = 'mongodb://localhost:27017'
 const dbName = 'meer'
 const colName = 'users'
@@ -26,4 +27,19 @@ exports.insertUser = (id, password) => {
       client.close()
     }
   })
+}
+
+exports.createToken = (user) => {
+  return new Promise((resolve, reject) => {
+    jwt.sign(
+      {
+        _id: user._id
+      },
+      'secret',
+      (err, token) => {
+        if(err) reject(err);
+        resolve(token);
+      }
+    )
+  });
 }
