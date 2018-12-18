@@ -19,7 +19,7 @@ app.post('/signup', function (req, res) {
     return User.insertUser(id, password)
   }
   const respond = response => res.json({success: response.result.n})
-  const onError = err => res.status(409).json({success: 0})
+  const onError = () => res.status(409).json({success: 0})
   
   User.findUserById(id)
   .then(addUser)
@@ -28,17 +28,16 @@ app.post('/signup', function (req, res) {
 })
 app.post('/signin', function (req, res) {
   const { id, password } = req.body
-  console.log(id, password)
-
-  const comparePassword = (result) => {
-    if(password !== result.password) throw new Error('Not found user')
-    return result
+  const createToken = user => {
+    if(!user) throw new Error('아이디를 다시 확인해주세요.')
+    if(password != user.password) throw new Error('비밀번호를 확인해주세요.')
+    return User.createToken(user)
   }
-  const onError = err => res.status(401).json({success: 0})
-  const respond = response => res.json({success: response})
+  const respond = response => res.json({token: response})
+  const onError = err => res.status(401).json({msg: err.message}) 
+
   User.findUserById(id)
-  .then(comparePassword)
-  .then(User.createToken)
+  .then(createToken)
   .then(respond)
   .catch(onError)
 })

@@ -26,6 +26,7 @@
           </div>
           <p v-if="validationId">{{validationId}}</p>
           <p v-if="validationPw">{{validationPw}}</p>
+          <p v-if="errorFromServer">{{errorFromServer}}</p>
           <div class="register-button-w">
             <button type="submit">Login</button>
           </div>
@@ -43,8 +44,12 @@ export default {
       id: '',
       password: '',
       validationId: '',
-      validationPw: ''
+      validationPw: '',
+      errorFromServer: ''
     }
+  },
+  created() {
+    // console.log(this.$store.getters.getToken)
   },
   methods : {
     checkId() {
@@ -65,8 +70,14 @@ export default {
     onSubmit() {
       const baseURI = 'http://localhost:3000';
       this.$http.post(`${baseURI}/signin`, { id: this.id, password: this.password })
-      // .then(() => this.$router.push('/signin'))
-      // .catch(err => this.validationId = '이미 있는 아이디입니다.')
+      .then(response => {
+        this.$store.dispatch('setToken', response.data.token)
+        localStorage.setItem('token', this.$store.getters.getToken)
+        this.$router.push('/')
+      })
+      .catch(err => {
+        this.errorFromServer = err.response.data.msg
+      })
     }
   },
 }

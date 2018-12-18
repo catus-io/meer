@@ -35,7 +35,12 @@ exports.createToken = (user) => {
       {
         _id: user._id
       },
-      'secret',
+      'should_be_moved_this_secret_code_to_a_differnt_folder_like_a_config_folder',
+      {
+        expiresIn: '7d',
+        issuer: 'CATUS',
+        subject: 'auth'
+      },
       (err, token) => {
         if(err) reject(err);
         resolve(token);

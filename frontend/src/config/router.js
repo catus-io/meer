@@ -25,6 +25,8 @@ export default new Router({
       name: 'signup',
       component: MeerSignup
     }
+    // todo 
+    // 페이지 라우팅 때 token 확인 
     // {
     //   path: '/',
     //   name: 'home',

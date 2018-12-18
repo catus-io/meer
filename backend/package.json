@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/nodemon/bin/nodemon.js index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [
     "groupware",
@@ -19,7 +19,5 @@
     "jsonwebtoken": "^8.4.0",
     "mongodb": "^3.1.10"
   },
-  "devDependencies": {
-    "nodemon": "^1.18.9"
-  }
+  "devDependencies": {}
 }
