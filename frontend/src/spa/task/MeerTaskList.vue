@@ -36,6 +36,8 @@ export default {
       validationValue : '' 
     }
   },
+  created () {
+  },
   methods : {
     checkTitle(){
       let title = this.title

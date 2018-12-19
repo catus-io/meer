@@ -9,3 +9,8 @@ exports.create = (req, res) => {
 
   Task.create({_id: _id, title: title, regDate: regDate}).then(respond).catch(onError)
 }
+exports.readAll = (req, res) => {
+  const respond = response => res.json(response)
+  const onError = () => res.status(500).json({msg: 'read error'})
+  Task.readAll().then(respond).catch(onError)
+}

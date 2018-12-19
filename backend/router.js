@@ -7,5 +7,6 @@ router
   .post('/signin', userController.login)
   .post('/signup', userController.create)
   .post('/task', authHelper.validateToken, taskController.create)
+  .get('/task', authHelper.validateToken, taskController.readAll)
 
 module.exports = router
