@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-import validation from '@/commons/validations/validations.js'
+import validation from '@/commons/validations/input.validations.js'
 export default {
   name: 'meer-signup',
   data() {

@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import validation from '@/commons/validations/validations.js'
+import validation from '@/commons/validations/input.validations.js'
 import MeerTask from '@/shared-components/MeerTask.vue'
 export default {
   name: 'meer-task-list',
@@ -45,7 +45,6 @@ export default {
       } 
     },
     onSubmit() {
-      console.log(localStorage.getItem('user-token'))
       let date = new Date().toLocaleDateString()
       const baseURI = 'http://localhost:3000';
       this.$http.post(
@@ -58,7 +57,10 @@ export default {
         }
       )
       .then(() => console.log('sever connect OK'))
-      .catch(err => this.validationValue = 'sever not connect')
+      .catch(err => {
+        if(err.response.data.code == 403) this.$router.push('/signin')
+        this.validationValue = 'sever not connect'
+      })
     }
   }
   

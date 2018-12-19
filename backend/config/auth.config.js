@@ -1,0 +1,1 @@
+exports.getSecret = () => 'should_be_moved_this_secret_code_to_a_differnt_folder_like_a_config_folder'
