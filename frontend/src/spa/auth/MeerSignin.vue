@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import validation from '@/commons/validations/auth.validations.js'
+import validation from '@/commons/validations/validations.js'
 export default {
   name: 'meer-signin',
   data() {
