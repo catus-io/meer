@@ -29,13 +29,18 @@ exports.insertUser = (id, password) => {
   })
 }
 
+/***********************************/
+/************* token ***************/
+/***********************************/
+const scr = 'should_be_moved_this_secret_code_to_a_differnt_folder_like_a_config_folder'
+
 exports.createToken = (user) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
       {
         _id: user._id
       },
-      'should_be_moved_this_secret_code_to_a_differnt_folder_like_a_config_folder',
+      scr,
       {
         expiresIn: '7d',
         issuer: 'CATUS',
@@ -46,5 +51,13 @@ exports.createToken = (user) => {
         resolve(token);
       }
     )
-  });
+  })
+}
+exports.validateToken = token => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, scr, (err, decoded) => {
+      if(err) reject({msg: 'invalid'})
+      resolve(decoded)
+    })
+  })
 }

@@ -72,7 +72,7 @@ export default {
       this.$http.post(`${baseURI}/signin`, { id: this.id, password: this.password })
       .then(response => {
         this.$store.dispatch('setToken', response.data.token)
-        localStorage.setItem('token', this.$store.getters.getToken)
+        localStorage.setItem('user-token', this.$store.getters.getToken)
         this.$router.push('/')
       })
       .catch(err => {

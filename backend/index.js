@@ -42,8 +42,17 @@ app.post('/signin', function (req, res) {
   .catch(onError)
 })
 app.post('/task', function (req, res) {
-  const { title, regDate } = req.body
-  console.log(req.body)
+  const token = req.headers['authorization']
+  User.validateToken(token) 
+  .then(decoded => {
+    const { title, regDate } = req.body
+    const decoded = decoded
+
+    console.log(req.body)
+    console.log(decoded)
+
+  })
+
 })
  
 app.listen(3000)

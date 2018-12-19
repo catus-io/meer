@@ -45,9 +45,18 @@ export default {
       } 
     },
     onSubmit() {
+      console.log(localStorage.getItem('user-token'))
       let date = new Date().toLocaleDateString()
       const baseURI = 'http://localhost:3000';
-      this.$http.post(`${baseURI}/task`, { title: this.title, regDate: date })
+      this.$http.post(
+        `${baseURI}/task`,
+        { title: this.title, regDate: date },
+        {
+          headers: {
+            'authorization': localStorage.getItem('user-token')
+          }
+        }
+      )
       .then(() => console.log('sever connect OK'))
       .catch(err => this.validationValue = 'sever not connect')
     }
