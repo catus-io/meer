@@ -41,5 +41,9 @@ app.post('/signin', function (req, res) {
   .then(respond)
   .catch(onError)
 })
+app.post('/task', function (req, res) {
+  const { title, regDate } = req.body
+  console.log(req.body)
+})
  
 app.listen(3000)

@@ -3,14 +3,16 @@
     <div class="meer-task-list-c">
       <div class="meer-task-input-w">
         <div class="meer-task-input-c">
-          <input type="text" v-model='title' @keyup="checkTitle"/>
-          <button>
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-          </button>
+          <form v-on:submit.prevent="onSubmit"> 
+            <input type="text" v-model='title' @keyup="checkTitle"/>
+            <button>
+              <font-awesome-icon type="submit" icon="plus"></font-awesome-icon>
+            </button>
+          </form>
         </div>
       </div>
       <div class="meer-task-validation-p">
-        <p>{{validationTitle}}</p>
+        <p>{{validationValue}}</p>
       </div>
       <div class="meer-task-list-p">
         <ul>
@@ -31,16 +33,23 @@ export default {
   data() {
     return {
       title : '',
-      validationTitle : '' 
+      validationValue : '' 
     }
   },
   methods : {
     checkTitle(){
       let title = this.title
-      if(validation.length(title, 30)) this.validationTitle = ''
+      if(validation.length(title, 30)) this.validationValue = ''
       else {
-        this.validationTitle = '30자 이하로 입렵해주세요.'
+        this.validationValue = '30자 이하로 입렵해주세요.'
       } 
+    },
+    onSubmit() {
+      let date = new Date().toLocaleDateString()
+      const baseURI = 'http://localhost:3000';
+      this.$http.post(`${baseURI}/task`, { title: this.title, regDate: date })
+      .then(() => console.log('sever connect OK'))
+      .catch(err => this.validationValue = 'sever not connect')
     }
   }
   
